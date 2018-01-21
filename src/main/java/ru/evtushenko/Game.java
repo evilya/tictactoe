@@ -21,8 +21,8 @@ class Game implements Runnable {
     public Game(final GamePanel gamePanel, final Model model) {
         this.model = model;
         this.gamePanel = gamePanel;
-        this.firstPlayer = new HumanPlayer(gamePanel, model);
-        this.secondPlayer = new AiPlayer(model);
+        this.firstPlayer = new AiPlayer(model);
+        this.secondPlayer = new HumanPlayer(gamePanel, model);
     }
 
     private void showDialog(TurnResult result) {

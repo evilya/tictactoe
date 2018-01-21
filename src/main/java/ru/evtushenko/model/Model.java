@@ -26,7 +26,7 @@ public class Model extends Observable {
         setChanged();
         notifyObservers(field);
 
-        boolean finished = isFinished(x, y);
+        boolean finished = isFinished(y, x);
         turnNumber++;
         if (finished) {
             if (currentShape == Shape.X) {
@@ -41,7 +41,7 @@ public class Model extends Observable {
         return TurnResult.NONE;
     }
 
-    private boolean isFinished(int x, int y) {
+    private boolean isFinished(int y, int x) {
         boolean horizontal = true;
         boolean vertical = true;
         boolean mainDiagonal = true;
@@ -77,8 +77,8 @@ public class Model extends Observable {
     public void clear() {
         currentShape = Shape.X;
         turnNumber = 0;
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
+        for (int i = 0; i < FIELD_SIZE; i++) {
+            for (int j = 0; j < FIELD_SIZE; j++) {
                 field[i][j] = Shape.EMPTY;
             }
         }

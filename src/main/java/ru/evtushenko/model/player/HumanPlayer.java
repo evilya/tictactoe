@@ -12,7 +12,7 @@ public class HumanPlayer implements Player {
 
     private final GamePanel gamePanel;
     private final Model model;
-    private MouseEvent lastClick;
+    private MouseEvent lastClickPosition;
 
     public HumanPlayer(final GamePanel gamePanel, final Model model) {
         this.model = model;
@@ -21,7 +21,7 @@ public class HumanPlayer implements Player {
             @Override
             public void mousePressed(MouseEvent e) {
                 synchronized (clickMonitor) {
-                    lastClick = e;
+                    lastClickPosition = e;
                     clickMonitor.notify();
                 }
             }
@@ -30,7 +30,7 @@ public class HumanPlayer implements Player {
 
     public Position turn() {
         synchronized (clickMonitor) {
-            while (lastClick == null) {
+            while (lastClickPosition == null) {
                 try {
                     clickMonitor.wait();
                 } catch (InterruptedException e) {
@@ -40,10 +40,10 @@ public class HumanPlayer implements Player {
             int gridSize = model.getFieldSize();
             int panelSize = gamePanel.getSquareSize();
 
-            int xPosition = lastClick.getX() * gridSize / panelSize;
-            int yPosition = lastClick.getY() * gridSize / panelSize;
+            int xPosition = lastClickPosition.getX() * gridSize / panelSize;
+            int yPosition = lastClickPosition.getY() * gridSize / panelSize;
 
-            lastClick = null;
+            lastClickPosition = null;
             return new Position(xPosition, yPosition);
         }
     }
