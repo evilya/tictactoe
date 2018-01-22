@@ -1,12 +1,8 @@
 package ru.evtushenko;
 
-import ru.evtushenko.model.Model;
-import ru.evtushenko.model.Position;
-import ru.evtushenko.model.Shape;
-import ru.evtushenko.model.player.AiPlayer;
-import ru.evtushenko.model.player.HumanPlayer;
-import ru.evtushenko.model.player.Player;
-import ru.evtushenko.view.GamePanel;
+import ru.evtushenko.model.*;
+import ru.evtushenko.player.AiPlayer;
+import ru.evtushenko.player.HumanPlayer;
 
 import javax.swing.*;
 import java.util.Random;

@@ -1,11 +1,8 @@
 package ru.evtushenko;
 
 import ru.evtushenko.model.Model;
-import ru.evtushenko.view.GamePanel;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 class TicTacToe extends JFrame {
 

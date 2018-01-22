@@ -4,12 +4,13 @@ public enum Shape {
     X, O, EMPTY;
 
     public Shape opposite() {
-        if (this == X) {
-            return O;
-        } else if (this == O) {
-            return X;
-        } else {
-            return EMPTY;
+        switch (this) {
+            case O:
+                return X;
+            case X:
+                return O;
+            default:
+                return EMPTY;
         }
     }
 }

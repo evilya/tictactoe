@@ -1,4 +1,4 @@
-package ru.evtushenko.view;
+package ru.evtushenko;
 
 import ru.evtushenko.model.Shape;
 

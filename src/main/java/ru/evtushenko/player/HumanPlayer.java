@@ -1,7 +1,8 @@
-package ru.evtushenko.model.player;
+package ru.evtushenko.player;
 
-import ru.evtushenko.view.GamePanel;
+import ru.evtushenko.GamePanel;
 import ru.evtushenko.model.Model;
+import ru.evtushenko.model.Player;
 import ru.evtushenko.model.Position;
 
 import java.awt.event.MouseAdapter;

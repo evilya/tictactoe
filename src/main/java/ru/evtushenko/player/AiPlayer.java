@@ -1,6 +1,7 @@
-package ru.evtushenko.model.player;
+package ru.evtushenko.player;
 
 import ru.evtushenko.model.Model;
+import ru.evtushenko.model.Player;
 import ru.evtushenko.model.Position;
 import ru.evtushenko.model.Shape;
 
@@ -26,29 +27,29 @@ public class AiPlayer implements Player {
     }
 
     private int[] bestTurnDepthSearch(int depth, Shape player) {
-        List<Position> possibleMoves = getPossibleMoves();
+        List<Position> possibleTurns = getPossibleTurns();
 
-        int maxScore = (player == currentShape) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int optimizedScore = (player == currentShape) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int currentScore;
         int resultRow = -1;
         int resultCol = -1;
 
-        if (possibleMoves.isEmpty() || depth == 0) {
-            maxScore = evaluate();
+        if (possibleTurns.isEmpty() || depth == 0) {
+            optimizedScore = evaluate();
         } else {
-            for (Position move : possibleMoves) {
+            for (Position move : possibleTurns) {
                 gameField[move.getY()][move.getX()] = player;
                 if (player == currentShape) {
                     currentScore = bestTurnDepthSearch(depth - 1, currentShape.opposite())[2];
-                    if (currentScore > maxScore) {
-                        maxScore = currentScore;
+                    if (currentScore > optimizedScore) {
+                        optimizedScore = currentScore;
                         resultCol = move.getX();
                         resultRow = move.getY();
                     }
                 } else {
                     currentScore = bestTurnDepthSearch(depth - 1, currentShape)[2];
-                    if (currentScore < maxScore) {
-                        maxScore = currentScore;
+                    if (currentScore < optimizedScore) {
+                        optimizedScore = currentScore;
                         resultCol = move.getX();
                         resultRow = move.getY();
                     }
@@ -56,10 +57,10 @@ public class AiPlayer implements Player {
                 gameField[move.getY()][move.getX()] = Shape.EMPTY;
             }
         }
-        return new int[]{resultCol, resultRow, maxScore};
+        return new int[]{resultCol, resultRow, optimizedScore};
     }
 
-    private List<Position> getPossibleMoves() {
+    private List<Position> getPossibleTurns() {
         List<Position> nextMoves = new ArrayList<>();
         for (int row = 0; row < fieldSize; row++) {
             for (int col = 0; col < fieldSize; col++) {
@@ -146,9 +147,9 @@ public class AiPlayer implements Player {
         int myShapes = 0;
         int oppShapes = 0;
         for (int i = 0; i < fieldSize; i++) {
-            if (gameField[i][fieldSize -1-i] == currentShape) {
+            if (gameField[i][fieldSize - 1 - i] == currentShape) {
                 myShapes++;
-            } else if (gameField[i][fieldSize -1-i] == currentShape.opposite()) {
+            } else if (gameField[i][fieldSize - 1 - i] == currentShape.opposite()) {
                 oppShapes++;
             }
         }

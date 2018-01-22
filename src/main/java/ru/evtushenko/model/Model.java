@@ -1,15 +1,13 @@
 package ru.evtushenko.model;
 
-import ru.evtushenko.TurnResult;
-
 import java.util.Observable;
 import java.util.Observer;
 
 public class Model extends Observable {
     private final int FIELD_SIZE = 3;
+    private final Shape[][] field;
     private Shape currentShape;
     private int turnNumber;
-    private final Shape[][] field;
 
     public Model() {
         field = new Shape[FIELD_SIZE][FIELD_SIZE];
